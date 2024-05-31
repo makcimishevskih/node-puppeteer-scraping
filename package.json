@@ -1,0 +1,20 @@
+{
+  "name": "parser-etl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/parser.js",
+    "read": "node scripts/file.js",
+    "send": "node scripts/sendToEmails.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^22.10.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "query-selector-shadow-dom": "^1.0.1"
+  }
+}
