@@ -2,6 +2,11 @@ import fs from 'fs/promises';
 
 import puppeteer from 'puppeteer-extra'; 
 import StealthPlugin from 'puppeteer-extra-plugin-stealth'; 
+import UserAgent from 'user-agents';
+
+
+
+import { sleep } from './helpers.js'
 
 puppeteer.use(StealthPlugin());
 
@@ -14,6 +19,8 @@ puppeteer.use(StealthPlugin());
   });
   
   const page = await browser.newPage();
+  
+  await page.setUserAgent((new UserAgent).toString());
   
   console.time();
   await page.goto(
@@ -69,6 +76,7 @@ puppeteer.use(StealthPlugin());
   
   for (let url of urls) {
     const page2 = await browser.newPage();
+    await page2.setUserAgent((new UserAgent).toString());
     
     await page2.goto(url, { 
       timeout : 0,
@@ -103,11 +111,6 @@ puppeteer.use(StealthPlugin());
 })
 // ();
 
-const sleep = (delay) => {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay);
-  });
-}
 
 async function getEmailAddress (page2) {  
     return await page2.evaluate(() => {

@@ -1,12 +1,14 @@
 import fs from 'node:fs/promises';
 import puppeteer from 'puppeteer-extra'; 
 import StealthPlugin from 'puppeteer-extra-plugin-stealth'; 
+import UserAgent from 'user-agents';
+
 
 puppeteer.use(StealthPlugin());
 
 (async() => {
   const urls = await read('hrefs');
-
+  
   const browser = await puppeteer.launch({
     headless: false,
     timeout: 0,
@@ -14,6 +16,7 @@ puppeteer.use(StealthPlugin());
   });
   
   const page = await browser.newPage()
+  await page.setUserAgent((new UserAgent).toString());
   
   console.time()
   for (let url of urls) {
